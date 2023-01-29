@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:provider/provider.dart';
+import 'package:starbucks_mobile_app_ui/constants/bottom_nav_bar.dart';
 import 'package:starbucks_mobile_app_ui/constants/colors.dart';
-import 'package:starbucks_mobile_app_ui/constants/constant_widgets.dart';
-import 'package:starbucks_mobile_app_ui/screens/coffee/coffee_screen.dart';
-import 'package:starbucks_mobile_app_ui/screens/star/start_screen.dart';
+import 'package:starbucks_mobile_app_ui/providers/screen_provider.dart';
+import 'package:starbucks_mobile_app_ui/screens/order/order_screen.dart';
+import 'package:starbucks_mobile_app_ui/screens/star/star_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,119 +15,73 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
   List<Widget> screens = const [
     StarScreen(),
-    CoffeeScreen(),
-    CoffeeScreen(),
-    CoffeeScreen()
+    OrderScreen(),
+    OrderScreen(),
+    OrderScreen()
   ];
 
-  int _currentIndex = 0;
+  List<String> appBarTitles = const [
+    "Starbukcs",
+    "Sipariş Yarat",
+    "Sipariş Detayı",
+    "Navigasyon"
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        backgroundColor: HexColor(background),
-        appBar: constantAppbar,
-        // TODO: use provider and move this to another widet
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(40),
-              topRight: Radius.circular(40),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: HexColor(darkGrey),
-                spreadRadius: 0,
-                blurRadius: 5,
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(40),
-              topRight: Radius.circular(40),
-            ),
-            child: BottomNavigationBar(
-              backgroundColor: Colors.red,
-              onTap: _onItemTapped,
-              currentIndex: _currentIndex,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              items: [
-                // Star navbar item
-                BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.star_border,
-                    color: HexColor(mainGreen),
-                  ),
-                  icon: Icon(
-                    Icons.star_border,
-                    color: HexColor(darkGreen),
-                  ),
-                  label: "Star",
+    int currentIndex =
+        Provider.of<ScreenProvider>(context, listen: true).currentIndex;
+    return Scaffold(
+      appBar: AppBar(
+        leading: currentIndex == 2
+            ? GestureDetector(
+                onTap: () {
+                  // Set screen provider's current index to 1 to show order screen
+                  Provider.of<ScreenProvider>(context, listen: false)
+                      .setCurrentIndex(1);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  color: HexColor(darkGreen),
                 ),
-                // Coffee navbar item
-                BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.coffee_outlined,
-                    color: HexColor(mainGreen),
-                  ),
-                  icon: Icon(
-                    Icons.coffee_outlined,
-                    color: HexColor(darkGreen),
-                  ),
-                  label: "Coffee",
-                ),
-                // Credit Card navbar item
-                BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.credit_card,
-                    color: HexColor(mainGreen),
-                  ),
-                  icon: Icon(
-                    Icons.credit_card,
-                    color: HexColor(darkGreen),
-                  ),
-                  label: "Credit Card",
-                ),
-                // Navigation navbar item
-                BottomNavigationBarItem(
-                  activeIcon: Icon(
-                    Icons.location_on_outlined,
-                    color: HexColor(mainGreen),
-                  ),
-                  icon: Icon(
-                    Icons.location_on_outlined,
-                    color: HexColor(darkGreen),
-                  ),
-                  label: "Navigation",
-                ),
-              ],
-            ),
-          ),
+              )
+            : null,
+        backgroundColor: Colors.white,
+        centerTitle: false,
+        title: Text(
+          appBarTitles.elementAt(currentIndex),
+          style: TextStyle(
+              color: HexColor(darkGreen), fontWeight: FontWeight.bold),
         ),
-
-        floatingActionButton: FloatingActionButton(
-            backgroundColor: HexColor(mainGreen),
-            onPressed: () {},
-            child: const Center(
-              child: Text(
-                "+",
-                style: TextStyle(fontSize: 35),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              print("Clicked notifications");
+            },
+            child: Icon(
+              Icons.notifications_none_rounded,
+              color: HexColor(darkGreen),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: GestureDetector(
+              onTap: () {
+                print("More clicked");
+              },
+              child: Icon(
+                Icons.more_vert,
+                color: HexColor(darkGreen),
               ),
-            )),
-        body: Center(child: screens.elementAt(_currentIndex)),
+            ),
+          ),
+        ],
       ),
+      backgroundColor: HexColor(background),
+      bottomNavigationBar: const BottomNavBar(),
+      body: Center(child: screens.elementAt(currentIndex)),
     );
   }
 }
