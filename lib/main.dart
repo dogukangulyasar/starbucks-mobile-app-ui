@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:starbucks_mobile_app_ui/screens/home/home_screen.dart';
 import 'package:starbucks_mobile_app_ui/screens/login/login_screen.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: GoogleFonts.inter().fontFamily),
       debugShowCheckedModeBanner: true,
-      home: const Scaffold(body: LoginScreen()),
+      home: const Scaffold(body: HomeScreen()),
     );
   }
 }
