@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:starbucks_mobile_app_ui/constants/colors.dart';
-import 'package:starbucks_mobile_app_ui/screens/star/draggable_scrollable.dart';
-import 'package:starbucks_mobile_app_ui/screens/star/money_card.dart';
+import 'package:starbucks_mobile_app_ui/screens/star/widgets/draggable_scrollable.dart';
+import 'package:starbucks_mobile_app_ui/screens/star/widgets/money_card.dart';
 
 class StarScreen extends StatefulWidget {
   const StarScreen({super.key});

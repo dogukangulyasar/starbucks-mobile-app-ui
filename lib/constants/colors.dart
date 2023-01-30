@@ -5,3 +5,4 @@ const String dark = "#2E2D38";
 const String mainGreen = "#4AA366";
 const String background = "#F7F8FA";
 const String buttonGrey = "#DFE4EC";
+const String grey = "#6F8094";
