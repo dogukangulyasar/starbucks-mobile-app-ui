@@ -14,6 +14,9 @@ class StarScreen extends StatefulWidget {
 class _StarScreenState extends State<StarScreen> {
   @override
   Widget build(BuildContext context) {
+    double phoneHeigth = MediaQuery.of(context).size.height;
+    double phoneWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: HexColor(mainGreen),
@@ -45,8 +48,8 @@ class _StarScreenState extends State<StarScreen> {
                       Column(
                         children: [
                           SizedBox(
-                            width: 150,
-                            height: 150,
+                            width: phoneWidth <= 375 ? 120 : 150,
+                            height: phoneHeigth <= 675 ? 120 : 150,
                             child: Image.asset(
                               "assets/images/coffee_process.png",
                             ),

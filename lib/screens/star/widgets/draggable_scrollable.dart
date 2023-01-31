@@ -5,9 +5,10 @@ class HomeDraggableScrollable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double phoneHeight = MediaQuery.of(context).size.height;
     return DraggableScrollableSheet(
-      initialChildSize: 0.5,
-      minChildSize: 0.5,
+      initialChildSize: phoneHeight <= 667 ? 0.4 : 0.5,
+      minChildSize: phoneHeight <= 667 ? 0.4 : 0.5,
       maxChildSize: 0.9,
       expand: true,
       builder: (context, scrollController) {
