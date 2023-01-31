@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:starbucks_mobile_app_ui/providers/horizontal_screen_provider.dart';
 import 'package:starbucks_mobile_app_ui/providers/screen_provider.dart';
 import 'package:starbucks_mobile_app_ui/screens/home/home_screen.dart';
 import 'package:starbucks_mobile_app_ui/screens/login/login_screen.dart';
@@ -17,8 +18,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: GoogleFonts.inter().fontFamily),
       debugShowCheckedModeBanner: true,
-      home: ChangeNotifierProvider(
-        create: (context) => ScreenProvider(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => ScreenProvider()),
+          ChangeNotifierProvider(
+              create: (context) => HorizontalScreenProvider()),
+        ],
         child: const Scaffold(body: HomeScreen()),
       ),
     );

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:starbucks_mobile_app_ui/constants/colors.dart';
 
 class ListItem extends StatefulWidget {
-  const ListItem({super.key});
+  const ListItem({super.key, required this.title, required this.price});
+  final String title;
+  final int price;
 
   @override
   State<ListItem> createState() => _ListItemState();
@@ -11,33 +15,47 @@ class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Card(
-        child: Container(
-          width: double.infinity,
-          height: 100,
-          color: Colors.red,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      padding: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
+      child: Column(
+        children: [
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset("assets/images/coffee_image.png"),
-                    Column(
-                      children: const [
-                        Text("Hazelnut Coffee"),
-                        Text("20 TL"),
-                      ],
-                    ),
-                  ],
+                Padding(
+                    padding: const EdgeInsets.only(right: 30),
+                    child: Image.asset("assets/images/coffee_image.png")),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                            color: HexColor(darkGreen),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "${widget.price} TL",
+                        style: TextStyle(
+                            color: HexColor(dark), fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
                 ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: HexColor(mainGreen)),
+                    child: const Text("Ekle"),
+                  ),
+                )
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
