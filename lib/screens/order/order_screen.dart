@@ -17,35 +17,37 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   // This lists will come from database,
   // it works: [[Most sellers list], [Foods list], [Coffees list]]
-  List<List<ListItem>> lists = const [
+  List<List<ListItem>> lists = [
     // Most sellers list
     [
-      ListItem(title: "Hazelnut Coffee", price: 20),
-      ListItem(title: "Americano", price: 30),
-      ListItem(title: "Caramel Latte", price: 50),
-      ListItem(title: "Kraker", price: 40),
-      ListItem(title: "White Chocolate Mocha", price: 60),
-      ListItem(title: "Mocha", price: 55),
+      ListItem(showPieceWidget: false, title: "Hazelnut Coffee", price: 20),
+      ListItem(showPieceWidget: false, title: "Americano", price: 30),
+      ListItem(showPieceWidget: false, title: "Caramel Latte", price: 50),
+      ListItem(showPieceWidget: false, title: "Kraker", price: 40),
+      ListItem(
+          showPieceWidget: false, title: "White Chocolate Mocha", price: 60),
+      ListItem(showPieceWidget: false, title: "Mocha", price: 55),
     ],
     // Foods list
     [
-      ListItem(title: "Kraker", price: 20),
-      ListItem(title: "Sandviç", price: 30),
-      ListItem(title: "Tost", price: 50),
+      ListItem(showPieceWidget: false, title: "Kraker", price: 20),
+      ListItem(showPieceWidget: false, title: "Sandviç", price: 30),
+      ListItem(showPieceWidget: false, title: "Tost", price: 50),
     ],
     // Coffees list
     [
-      ListItem(title: "Hazelnut Coffee", price: 20),
-      ListItem(title: "Americano", price: 30),
-      ListItem(title: "Caramel Latte", price: 50),
-      ListItem(title: "Latte", price: 40),
-      ListItem(title: "White Chocolate Mocha", price: 60),
-      ListItem(title: "Mocha", price: 55),
+      ListItem(showPieceWidget: false, title: "Hazelnut Coffee", price: 20),
+      ListItem(showPieceWidget: false, title: "Americano", price: 30),
+      ListItem(showPieceWidget: false, title: "Caramel Latte", price: 50),
+      ListItem(showPieceWidget: false, title: "Latte", price: 40),
+      ListItem(
+          showPieceWidget: false, title: "White Chocolate Mocha", price: 60),
+      ListItem(showPieceWidget: false, title: "Mocha", price: 55),
     ],
     // Bottles list
     [
-      ListItem(title: "Yeşil termos", price: 20),
-      ListItem(title: "Pembe termos", price: 30),
+      ListItem(showPieceWidget: false, title: "Yeşil termos", price: 20),
+      ListItem(showPieceWidget: false, title: "Pembe termos", price: 30),
     ]
   ];
 
@@ -90,7 +92,6 @@ class _OrderScreenState extends State<OrderScreen> {
                           // TODO: Make sure it is responsive
                           height: 400,
                           child: ListView.builder(
-                            physics: const AlwaysScrollableScrollPhysics(),
                             itemCount:
                                 lists.elementAt(currentHorizontalIndex).length,
                             itemBuilder: (context, index) {
